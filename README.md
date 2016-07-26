@@ -55,4 +55,4 @@ Happy hacking!
 
 ## License
 
-See [COPYING](https://github.com/PageArkanis/StEVE/COPYING) for licensing info.
+See [COPYING](https://github.com/PageArkanis/StEVE/blob/master/COPYING) for licensing info.
