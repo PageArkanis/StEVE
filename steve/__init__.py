@@ -6,7 +6,7 @@ import appdirs
 APPNAME     = 'StEVE'
 APPAUTHOR   = 'Page Arkanis'
 
-if os.environ['SDE_DB_DIR']:
+if 'SDE_DB_DIR' in os.environ and os.environ['SDE_DB_DIR']:
     app_data_dir = os.environ['SDE_DB_DIR']
 else:
     app_data_dir = appdirs.user_data_dir(APPNAME, APPAUTHOR)
