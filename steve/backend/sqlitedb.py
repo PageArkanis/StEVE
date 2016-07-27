@@ -8,6 +8,7 @@ import urllib
 
 
 from steve import app_data_dir
+from __builtin__ import str
 
 class SqliteDB(object):
     
@@ -25,18 +26,22 @@ class SqliteDB(object):
         except IOError:
             logging.warning('Could not perform update check. Check your connection.') 
 
-        self.db_file          = op.join(app_data_dir, SqliteDB.DB_FILE)
-        self.con              = lite.connect(self.db_file)
-        self.con.text_factory = str
-        self.con.row_factory  = lite.Row
+        self.db_file = op.join(app_data_dir, SqliteDB.DB_FILE)
 
 
     def __del__(self):
         self.con.close()
 
+    @property
+    def con(self):
+        connection = lite.connect(self.db_file)
+        connection.text_factory = str
+        connection.row_factory  = lite.Row
+        return connection
+        
 
     def queryOne(self, query):
-        assert isinstance(query, str)
+        assert isinstance(query, str)        
         cur = self.con.cursor()    
         cur.execute(query)
         return cur.fetchone()
