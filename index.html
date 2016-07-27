@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Steve by PageArkanis</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/PageArkanis/StEVE">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/PageArkanis/StEVE/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/PageArkanis/StEVE/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Steve</h1>
+          <p>A Static Data Access API for EVE Online</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/PageArkanis">PageArkanis</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="steve---a-static-data-access-api-for-eve-online" class="anchor" href="#steve---a-static-data-access-api-for-eve-online" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>StEVE - A Static Data Access API for EVE Online</h1>
+
+<p>StEVE is intended to ease the development for EVE Online and it's Static Data 
+Export (SDE). StEVE provides a high-level API to access the SDE data without 
+having to know much about the data is structured internally.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>1- Download the source code: </p>
+
+<pre><code>git clone https://github.com/PageArkanis/StEVE
+</code></pre>
+
+<p>2- build and install:</p>
+
+<pre><code>cd StEVE
+python setup.py install
+</code></pre>
+
+<h2>
+<a id="running-steve" class="anchor" href="#running-steve" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Running StEVE</h2>
+
+<p>First time StEVE is imported it will fetch the SDE from <a href="https://www.fuzzwork.co.uk/dump/sqlite-latest.sqlite">https://www.fuzzwork.co.uk/dump/sqlite-latest.sqlite</a>. 
+Afterwards it will only fetch a new version once its available but will check 
+for it every time a program is started. Without an Internet connection it will
+throw a warning but will continue to work.</p>
+
+<p>Set <em>SDE_DB_DIR</em> to a directory in your environment to use this directory as the
+SDE database directory. This saves from downloading SDE if you run multiple 
+versions of StEVE. </p>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
+
+<pre><code>from steve import Assets, Universe
+
+# print Tritanium ID
+print Assets.type['Tritanium'].uid
+
+# print Name for ID 34
+print Assets.type[34].name
+
+# print Jita ID
+print Universe.system['Jita'].uid
+
+# print System Name for ID 
+print Universe.system[30000142].name
+</code></pre>
+
+<p>Happy hacking!</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>See <a href="https://github.com/PageArkanis/StEVE/blob/master/COPYING">COPYING</a> for licensing info.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
