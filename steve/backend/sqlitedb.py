@@ -1,4 +1,5 @@
 from hashlib import md5
+import sys
 
 import bz2
 import os.path as op
@@ -23,7 +24,7 @@ class SqliteDB(object):
             if SqliteDB.update(SqliteDB.R_ARCHIVE, SqliteDB.L_ARCHIVE):
                 SqliteDB.unpack()
         except IOError:
-            print 'Could not perform update check: IOError'
+            print 'IOError: Could not perform update check. Check your connection.'
 
         self.db_file          = op.join(app_data_dir, SqliteDB.DB_FILE)
         self.con              = lite.connect(self.db_file)
@@ -71,6 +72,7 @@ class SqliteDB(object):
         # get remote file if it does not exist locally
         if local_md5 is None:
             print 'Download: %s -> %s' % (remote_file, local_file),
+            sys.stdout.flush()
             urllib.URLopener().retrieve(remote_file, local_file)
             print 'finished.'
             return True
@@ -84,6 +86,7 @@ class SqliteDB(object):
             
             if local_md5 != remote_md5:
                 print 'Download: %s -> %s' % (remote_file, local_file),
+                sys.stdout.flush()
                 urllib.URLopener().retrieve(remote_file, local_file)
                 print 'finished.'
                 return True

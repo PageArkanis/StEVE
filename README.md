@@ -32,6 +32,10 @@ Afterwards it will only fetch a new version once its available but will check
 for it every time a program is started. Without an Internet connection it will
 throw a warning but will continue to work.
 
+Set *SDE_DB_DIR* to a directory in your environment to use this directory as the
+SDE database directory. This saves from downloading SDE if you run multiple 
+versions of StEVE. 
+
 ## Examples
 
 
