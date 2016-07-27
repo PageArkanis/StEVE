@@ -1,14 +1,13 @@
-from hashlib import md5
-import sys
-
 import bz2
+from hashlib import md5
+import logging
 import os.path as op
+import sqlite3 as lite
+import sys
 import urllib
 
-import sqlite3 as lite
 
 from steve import app_data_dir
-
 
 class SqliteDB(object):
     
@@ -24,7 +23,7 @@ class SqliteDB(object):
             if SqliteDB.update(SqliteDB.R_ARCHIVE, SqliteDB.L_ARCHIVE):
                 SqliteDB.unpack()
         except IOError:
-            print 'IOError: Could not perform update check. Check your connection.'
+            logging.warning('Could not perform update check. Check your connection.') 
 
         self.db_file          = op.join(app_data_dir, SqliteDB.DB_FILE)
         self.con              = lite.connect(self.db_file)
@@ -71,10 +70,10 @@ class SqliteDB(object):
     
         # get remote file if it does not exist locally
         if local_md5 is None:
-            print 'Download: %s -> %s' % (remote_file, local_file),
+            logging.info('Download: %s -> %s' % (remote_file, local_file))
             sys.stdout.flush()
             urllib.URLopener().retrieve(remote_file, local_file)
-            print 'finished.'
+            logging.info('finished.')
             return True
     
         # continue to check
@@ -85,10 +84,10 @@ class SqliteDB(object):
             remote_md5 = remote_md5.split()[0]
             
             if local_md5 != remote_md5:
-                print 'Download: %s -> %s' % (remote_file, local_file),
+                logging.info('Download: %s -> %s' % (remote_file, local_file))
                 sys.stdout.flush()
                 urllib.URLopener().retrieve(remote_file, local_file)
-                print 'finished.'
+                logging.info('finished.')
                 return True
             
         return False
