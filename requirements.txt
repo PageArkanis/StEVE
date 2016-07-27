@@ -1,0 +1,2 @@
+StEVE
+appdirs>=1.4.0
