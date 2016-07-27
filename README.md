@@ -6,20 +6,11 @@ having to know much about the data is structured internally.
 
 ## Installation
 
-1- Install the dependencies:
-
-    appdirs
-    sqlite3
-
-Additional dependencies:
-
-    ...    
-
-2- Download the source code: 
+1- Download the source code: 
 
     git clone https://github.com/PageArkanis/StEVE
 
-3- build and install:
+2- build and install:
 
     cd StEVE
     python setup.py install
