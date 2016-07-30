@@ -2,6 +2,7 @@ from steve.backend.sqlitedb import SDB
 from steve.item             import Item
 from steve.type             import Type
 from steve.market_group     import MarketGroup
+from steve.planet_schematic import PlanetSchematic
 
 
 class Assets(object):
@@ -15,6 +16,7 @@ class Assets(object):
         self._marketGroupsByName = {}   #  { <name> : [MarketGroup*]  }
         self._flags              = {}   #  { <uid> : <name> }
         self._unique_names       = {}   #  { <uid> : <name>, <name> : <uid> }
+        self._planet_schematics  = {}   #  { <uid> : PlanetSchematic }
 
         self.testMarketGroup = MarketGroup(self, [-1, None, 'Test', '', 0, True])
         
@@ -89,6 +91,20 @@ class Assets(object):
             for entry in SDB.queryAll('SELECT flagID, flagText FROM invFlags'):
                 self._flags[entry[0]] = entry[1]
         return self._flags
+
+
+    @property
+    def planetSchematic(self):
+        
+        if len(self._planet_schematics) == 0:
+            query = 'SELECT * from planetSchematics'
+            for entry in SDB.queryAll(query):
+                _object = PlanetSchematic(self, entry)
+                if _object:
+                    self._planet_schematics[_object.name] = _object
+                    self._planet_schematics[_object.uid]  = _object
+        
+        return self._planet_schematics
 
 
     @property

@@ -29,9 +29,6 @@ class SqliteDB(object):
         self.db_file = op.join(app_data_dir, SqliteDB.DB_FILE)
 
 
-    def __del__(self):
-        self.con.close()
-
     @property
     def con(self):
         connection = lite.connect(self.db_file)
