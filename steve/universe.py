@@ -4,6 +4,7 @@ from steve.constellation    import Constellation
 from steve.system           import System
 from steve.station import Station
 from steve.station_type import StationType
+from steve.planet import Planet
 
 
 class Universe(object):
@@ -24,6 +25,8 @@ class Universe(object):
         
         self._stationTypes       = {}
         
+        self._planets            = {}
+        self._planetNames        = []
         
 
         
@@ -69,6 +72,20 @@ class Universe(object):
 
 
     @property
+    def planet(self):
+        
+        if len(self._planets) == 0:
+            query = 'SELECT * from mapDenormalize WHERE groupID = 7'
+            for entry in SDB.queryAll(query):
+                _obj = Planet(self, entry)
+                self._planets[_obj.name] = _obj
+                self._planets[_obj.uid]  = _obj
+                self._planetNames.append(_obj.name)
+
+        return self._planets
+
+    
+    @property
     def regionNames(self):
         if len(self._regionNames) == 0:
             _ = self.regions
@@ -89,6 +106,13 @@ class Universe(object):
         return self._systemNames
     
 
+    @property
+    def planetNames(self):
+        if len(self._planetNames) == 0:
+            _ = self.planets
+        return self._planetNames
+
+    
     @property
     def station(self):
         
